@@ -3,13 +3,16 @@
 import requests
 
 BASE_URL = 'http://comtrade.un.org/api/get?'
-PARAMS = 'max=500&type=C&freq=A&px=HS&ps=2017&r=all&p=76%2C4%2C8%2C818%2C70&rg=2&cc=TOTAL&fmt=csv'
+
+PERIODS = '2017%2C2016%2C2015'
+REPORTERS = 'all'
+PARTNERS = '76%2C4%2C8%2C818%2C70'
+TRADE_FLOW = '2' # 2 - export 1 - import 
+CLASSIFICATION_CODE = 'TOTAL'
+PARAMS = 'max=50000&type=C&freq=A&px=HS&ps={}&r={}&p={}&rg={}&cc={}&fmt=csv'.format(PERIODS, REPORTERS, PARTNERS, TRADE_FLOW, CLASSIFICATION_CODE)
 
 def main():
-	headers = requests.utils.default_headers()
-	headers['User-Agent'] = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.140 Safari/537.36'
-	
-	response = requests.get(BASE_URL + PARAMS, headers=headers)
+	response = requests.get(BASE_URL + PARAMS)
 	# .decode('utf-8')
 	
 	file = open("response.csv","w")
