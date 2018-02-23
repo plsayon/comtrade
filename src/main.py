@@ -5,6 +5,7 @@ import requests
 import time
 
 import params
+import parser
 
 DATABASE_DIR = '../database/'
 
@@ -14,6 +15,10 @@ BASE_URL = 'http://comtrade.un.org/api/get?'
 def check_dependencies():
 	if not os.path.exists(DATABASE_DIR):
 	    os.makedirs(DATABASE_DIR)
+	else:
+		# if exists, remove all files inside
+		for file in os.listdir(DATABASE_DIR):
+			os.remove(DATABASE_DIR + file) 
 
 def main():
 
@@ -55,7 +60,13 @@ def main():
 			time.sleep(3600)
 
 	
-	
 if __name__ == '__main__':
+	
+	# check if all folders are all right
 	check_dependencies()
+
+	# call API
 	main()
+
+	# create result file
+	parser.parse_results()
