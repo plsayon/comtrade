@@ -27,7 +27,16 @@ def main():
 	# always in groups of five or less
 	number_of_calls = 0
 	for partners_url in partners:
-		params_url = 'max=50000&type=C&freq=A&px=HS&ps={}&r={}&p={}&rg={}&cc={}&fmt=csv'.format(periods, reporters, partners_url, trade_flow, classification_code)
+		params_url = ('max=50000' +
+					'&type=C'+
+					'&freq=A'+
+					'&px=HS' +
+					'&ps='+ periods +
+					'&r='+ reporters +
+					'&p=' + partners_url +
+					'&rg=' + trade_flow +
+					'&cc=' + classification_code +
+					'&fmt=csv')
 		
 		# get request
 		response = requests.get(BASE_URL + params_url)
@@ -39,7 +48,11 @@ def main():
 		file.close() 
 
 		# wait one second to make another api get
-		time.sleep(1) 
+		time.sleep(1)
+
+		# wait one hour if number of requests exceed limit per hour
+		if(number_of_calls == 100):
+			time.sleep(3600)
 
 	
 	
