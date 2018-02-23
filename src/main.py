@@ -5,7 +5,7 @@ import requests
 import time
 
 import params
-import parser
+import parser_utils
 
 DATABASE_DIR = '../database/'
 
@@ -69,4 +69,4 @@ if __name__ == '__main__':
 	main()
 
 	# create result file
-	parser.parse_results()
+	parser_utils.parse_results()
