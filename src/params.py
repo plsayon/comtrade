@@ -1,21 +1,26 @@
 #!/usr/bin/python
 
-import json
+import params_utils
 
-COUNTRIES_JSON = '../utils/countries.json'
+COUNTRIES_LIST = '../utils/countries.txt'
 
-def get_country_id(country_name):
-	file = open(COUNTRIES_JSON, "r")
-	data = json.load(file)
+def get_countries_urls():
+	
+	countries = []
+	file = open(COUNTRIES_LIST, "r")
+	
+	for country in file:
+		countries.append(params_utils.get_country_id(country.rstrip('\n')));
 
-	for country in data['results']:
-		 if country_name == country['text']:
-			 return country['id']
+	count = 1
+	aux = []
+	urls = []
+	for country in countries:
+		aux.append(country)
+		if count % 5 == 0 or count == len(countries):
+			urls.append(params_utils.get_url_multiple_items(aux))
+			aux = []
 
-def get_url_multiple_items(items):
-	result_url = ""
+		count = count + 1
 
-	for item in items:
-		result_url = result_url + item + "%2C"
-
-	return result_url[:-3]
+	return urls
