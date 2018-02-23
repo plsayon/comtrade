@@ -2,29 +2,71 @@
 
 import os
 import requests
+import time
+
+import params
+import parser
 
 DATABASE_DIR = '../database/'
 
 BASE_URL = 'http://comtrade.un.org/api/get?'
 
-PERIODS = '2017%2C2016%2C2015'
-REPORTERS = 'all'
-PARTNERS = '76%2C4%2C8%2C818%2C70'
-TRADE_FLOW = '2' # 2 - export 1 - import 
-CLASSIFICATION_CODE = 'TOTAL'
-PARAMS = 'max=50000&type=C&freq=A&px=HS&ps={}&r={}&p={}&rg={}&cc={}&fmt=csv'.format(PERIODS, REPORTERS, PARTNERS, TRADE_FLOW, CLASSIFICATION_CODE)
-
+# check if database folder exist
 def check_dependencies():
 	if not os.path.exists(DATABASE_DIR):
 	    os.makedirs(DATABASE_DIR)
+	else:
+		# if exists, remove all files inside
+		for file in os.listdir(DATABASE_DIR):
+			os.remove(DATABASE_DIR + file) 
 
 def main():
-	response = requests.get(BASE_URL + PARAMS)
-	
-	file = open(DATABASE_DIR + "response.csv","w")
-	file.write(response.content)
-	file.close() 
+
+	# params to change
+	periods = '2017%2C2016%2C2015'
+	reporters = 'all'
+	partners = params.get_countries_urls()
+	trade_flow = '2'
+	classification_code = 'TOTAL'
+
+	# always in groups of five or less
+	number_of_calls = 0
+	for partners_url in partners:
+		params_url = ('max=50000' +
+					'&type=C'+
+					'&freq=A'+
+					'&px=HS' +
+					'&ps='+ periods +
+					'&r='+ reporters +
+					'&p=' + partners_url +
+					'&rg=' + trade_flow +
+					'&cc=' + classification_code +
+					'&fmt=csv')
+		
+		# get request
+		response = requests.get(BASE_URL + params_url)
+		number_of_calls = number_of_calls + 1
+
+		# write csv response
+		file = open(DATABASE_DIR + "comtrade_{}.csv".format(number_of_calls),"w")
+		file.write(response.content)
+		file.close() 
+
+		# wait one second to make another api get
+		time.sleep(1)
+
+		# wait one hour if number of requests exceed limit per hour
+		if(number_of_calls == 100):
+			time.sleep(3600)
+
 	
 if __name__ == '__main__':
+	
+	# check if all folders are all right
 	check_dependencies()
+
+	# call API
 	main()
+
+	# create result file
+	parser.parse_results()
