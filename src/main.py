@@ -26,7 +26,7 @@ def main():
 	periods = '2017%2C2016%2C2015'
 	reporters = 'all'
 	partners = params.get_countries_urls()
-	trade_flow = '2'
+	trade_flow = '1,2'
 	classification_code = 'TOTAL'
 
 	# always in groups of five or less
