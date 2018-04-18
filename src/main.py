@@ -23,7 +23,7 @@ def check_dependencies():
 def main():
 
 	# params to change
-	periods = '2017%2C2016%2C2015'
+	periods = '2015%2C2014%2C2014%2C2012%2C2011'
 	reporters = 'all'
 	partners = params.get_countries_urls()
 	trade_flow = '1,2'
