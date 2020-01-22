@@ -1,6 +1,6 @@
 # comtrade
 
-API request made in order to automate the extraction of data from [comtrade](https://comtrade.un.org/data/) respecting the usage limits.
+API request made in order to automate the extraction of data from [UN Comtrade Database](https://comtrade.un.org/data/) respecting the usage limits.
 
 ## Install ##
 
