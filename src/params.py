@@ -63,4 +63,8 @@ def get_periods_urls():
 
 		count = count + 1
 
+<<<<<<< HEAD
 	return urls
+=======
+	return urls
+>>>>>>> b2e6468c9af07b7c1d9321e24b361749e006c40f

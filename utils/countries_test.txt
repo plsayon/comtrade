@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 Afghanistan
 Albania
 Algeria
@@ -7,4 +8,15 @@ Angola
 Anguilla
 Antarctica
 Antigua and Barbuda
+=======
+Afghanistan
+Albania
+Algeria
+American Samoa
+Andorra
+Angola
+Anguilla
+Antarctica
+Antigua and Barbuda
+>>>>>>> b2e6468c9af07b7c1d9321e24b361749e006c40f
 Argentina
