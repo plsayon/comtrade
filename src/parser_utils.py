@@ -17,7 +17,7 @@ def parse_results():
 				if(file != "comtrade_1.csv"):
 					next(comtrade_file)
 
-				# read file and appen in result_file
+				# read file and append in result_file
 				for line in comtrade_file:
 				    result_file.write(line)
 
