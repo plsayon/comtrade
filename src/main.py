@@ -50,11 +50,7 @@ def main():
 
 				number_of_calls = number_of_calls + 1
 
-<<<<<<< HEAD
 				# if previous attempt was unsuccessful, continues from where it stopped
-=======
-				#if previous attempt was unsuccessful, continues from where it stopped
->>>>>>> b2e6468c9af07b7c1d9321e24b361749e006c40f
 				if os.path.exists(DATABASE_DIR + "comtrade_{}.csv".format(number_of_calls)):
 					continue
 

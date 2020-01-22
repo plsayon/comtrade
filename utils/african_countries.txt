@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 Algeria
 Angola
 Benin
@@ -108,5 +107,4 @@ Uganda
 United Rep. of Tanzania
 Western Sahara
 Zambia
->>>>>>> b2e6468c9af07b7c1d9321e24b361749e006c40f
 Zimbabwe
